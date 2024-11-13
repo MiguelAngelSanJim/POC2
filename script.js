@@ -27,7 +27,7 @@ class SnakeRace {
 		y: parseInt(this.alto / 2),
 		dir: 1,	//0:arriba, 1:derecha, 2:abajo, 3:izquierda
 		giro: 1,	//dirección del siguiente giro
-		vel: 2,
+		vel: 0.5,
 		//Posición del canvas
 		posX: null,
 		posY: null,
