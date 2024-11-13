@@ -73,19 +73,22 @@ class SnakeRace {
 	}
   
 	iniciarReconocimiento = () => {
-	  if ('webkitSpeechRecognition' in window) {
-		this.recognition = new webkitSpeechRecognition()
-		this.recognition.continuous = true // Escucha continuamente
-		this.recognition.lang = 'es-ES'
-		this.recognition.interimResults = false
-  
-		this.recognition.onresult = (event) => {
-		  const comando = event.results[event.resultIndex][0].transcript.toLowerCase()
-		  console.log('Comando de voz:', comando)
-		  this.procesarComando(comando)
-		}
-  
-		this.recognition.start()
+	 if ('webkitSpeechRecognition' in window) {
+			this.recognition = new webkitSpeechRecognition()
+			this.recognition.continuous = true // No escucha continuamente
+			this.recognition.lang = 'es-ES'
+			this.recognition.interimResults = false
+
+			this.recognition.onresult = (event) => {
+				const comando = event.results[event.resultIndex][0].transcript.toLowerCase()
+				console.log('Comando de voz:', comando)
+				this.procesarComando(comando)
+			}
+			this.recognition.onspeechend= function () {
+				this.recognition.stop()
+				
+			}
+			this.recognition.start()
 	  } else {
 		alert("Tu navegador no soporta el reconocimiento de voz.")
 	  }
